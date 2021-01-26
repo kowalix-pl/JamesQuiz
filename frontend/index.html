@@ -13,22 +13,27 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>WELCOME TO JAMES QUIZ</h1>
+    <div id="welcomePage">
+     <h1>WELCOME TO JAMES QUIZ</h1>
 
-    <label for="usernameInput">Enter your name here:</label>
-    <input type="text" name="username" id="usernameInput"><br>
-    <h3>Choose the subject of your quiz!</h3>
+      <label for="usernameInput">Enter your name here:</label>
+      <input type="text" name="username" id="usernameInput"><br>
+      <h3>Choose the subject of your quiz!</h3>
     
-    <input type="radio" id="jsradio" name="quiztype" value="javascript">
-    <label for="jsradio">JavaScript</label><br>
+      <input type="radio" id="jsradio" name="quiztype" value="javascript">
+      <label for="jsradio">JavaScript</label><br>
     
-    <input type="radio" id="htmlradio" name="quiztype" value="html">
-    <label for="htmlradio">HTML</label><br>
-    
-    <input type="radio" id="cssradio" name="quiztype" value="css">
-    <label for="cssradio">CSS</label><br><br>
+      <input type="radio" id="htmlradio" name="quiztype" value="html">
+      <label for="htmlradio">HTML</label><br>
+      
+      <input type="radio" id="cssradio" name="quiztype" value="css">
+      <label for="cssradio">CSS</label><br><br>
 
-    <button type="button">START!</button>
+      <button id="startButton" type="button">START!</button>
+    </div>
+    <div id="questionsPage" class="hidden">
+      <h1>Question Page</h1>
+    </div>
 
     <script src="script.js" async defer></script>
   </body>
