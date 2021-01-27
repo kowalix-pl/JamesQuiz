@@ -3,14 +3,18 @@ const startButton = document.getElementById("startButton");
 const welcomePage = document.getElementById("welcomePage");
 const questionsPage = document.getElementById("questionsPage");
 const quizRadioButtons = document.getElementById("quizInput");
+const usernameInput = document.getElementById("usernameInput");
 
 startButton.addEventListener("click", ()=>{
   welcomePage.classList.add("hidden");
   questionsPage.classList.remove("hidden");
+  const quizName = document.querySelector('input[name="quiztype"]:checked').value;
+  startQuiz(usernameInput.value, quizName);
 }); 
 
-/* <input type="radio" id="jsradio" name="quiztype" value="javascript">
-<label for="jsradio">JavaScript</label><br> */
+function startQuiz(username,quizName){
+  console.log("Quiz is starting now:",username, quizName);
+};
 
 function radioButton(label,value) {
   const newInputId = `${value}radio`;
@@ -24,6 +28,8 @@ function radioButton(label,value) {
   newLabel.setAttribute("for",newInputId);
   newLabel.textContent = label;
   quizRadioButtons.append(newLabel);
+  const brtag = document.createElement("br");
+  quizRadioButtons.append(brtag);
 };
 
 radioButton("Python","python");
