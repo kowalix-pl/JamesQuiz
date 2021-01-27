@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -19,18 +16,13 @@
       <label for="usernameInput">Enter your name here:</label>
       <input type="text" name="username" id="usernameInput"><br>
       <h3>Choose the subject of your quiz!</h3>
-    
-      <input type="radio" id="jsradio" name="quiztype" value="javascript">
-      <label for="jsradio">JavaScript</label><br>
-    
-      <input type="radio" id="htmlradio" name="quiztype" value="html">
-      <label for="htmlradio">HTML</label><br>
-      
-      <input type="radio" id="cssradio" name="quiztype" value="css">
-      <label for="cssradio">CSS</label><br><br>
 
+      <div id="quizInput">
+
+      </div>
       <button id="startButton" type="button">START!</button>
     </div>
+
     <div id="questionsPage" class="hidden">
       <h1>Question Page</h1>
     </div>
