@@ -1,3 +1,8 @@
+const backendAPI = {
+  getQuizNames: function(cb) {
+    cb(null,["HTML","CSS","JavaScript"])
+  }
+};
 
 const startButton = document.getElementById("startButton");
 const welcomePage = document.getElementById("welcomePage");
@@ -32,5 +37,8 @@ function radioButton(label,value) {
   quizRadioButtons.append(brtag);
 };
 
-radioButton("Python","python");
-radioButton("Ruby","ruby");
+backendAPI.getQuizNames((error,quizNames)=>{
+ quizNames.forEach(quizName => {
+   radioButton(quizName, quizName.toLowerCase());
+ });
+});
