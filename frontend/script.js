@@ -22,22 +22,26 @@ function startQuiz(username,quizName){
   console.log("Quiz is starting now:",username, quizName);
 };
 
-function htmlElementCreator(tagName,attributes){
+function htmlElementCreator(tagName,attributes,textContent){
   const element = document.createElement(tagName);
-  Object.keys(attributes).forEach((key)=>{
-   element.setAttribute(key,attributes[key])
-  });
+  if (attributes){
+    Object.keys(attributes).forEach((key)=>{
+     element.setAttribute(key,attributes[key])
+    });  
+  }
+
+  if (textContent){
+    element.textContent = textContent;
+  }
   return element
 };
 
 function radioButtonCreator(parent,options) {
-  const newInput = htmlElementCreator("input",{type:"radio", name: options.name,value: options.value, id:options.id})
+  const newInput = htmlElementCreator("input",{type:"radio", name:options.name,value:options.value,id:options.id});
   parent.append(newInput);
-  const newLabel = document.createElement("label");
-  newLabel.setAttribute("for",options.id);
-  newLabel.textContent = options.label;
+  const newLabel = htmlElementCreator("label",{for:options.id},options.label);
   parent.append(newLabel);
-  const brtag = document.createElement("br");
+  const brtag = htmlElementCreator("br");
   parent.append(brtag);
 };
  
