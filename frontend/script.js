@@ -9,7 +9,7 @@ const welcomePage = document.getElementById("welcomePage");
 const questionsPage = document.getElementById("questionsPage");
 const quizRadioButtons = document.getElementById("quizInput");
 const usernameInput = document.getElementById("usernameInput");
-
+const questionsContainer = document.getElementById("questionsContainer");
 
 startButton.addEventListener("click", ()=>{
   welcomePage.classList.add("hidden");
@@ -42,26 +42,18 @@ function radioButtonForWelcomePage(label,value) {
   radioButtonCreator(quizRadioButtons,{id:newInputId,label:label,value:value,name:"quiztype"});
 };
 
-/* <h2>Question number: 1</h2>
-      <h3>How do you define function in JavaScript?</h3>
-       <input type="radio" id="answer1" name="answer" value="answer1">
-       <label for="answer1">Function(){}</label><br>
-       <input type="radio" id="answer2" name="answer" value="answer2">
-       <label for="answer1">Get ..d</label><br>
-       <input type="radio" id="answer3" name="answer" value="answer3">
-       <label for="answer1">Ans3</label><br><br>
-       <button type="button">Next Question ></button> */
-
 function createQuestionRB(){
     const questionNumber = document.createElement("h2"); 
     questionNumber.textContent = "Question number: 1"; 
-    questionsPage.append(questionNumber);
+    questionsContainer.append(questionNumber);
     const displayQuestion = document.createElement("h3"); 
     displayQuestion.textContent = "How do you define function in JavaScript?"; 
-    questionsPage.append(displayQuestion);
+    questionsContainer.append(displayQuestion);
+    
+    radioButtonCreator(questionsContainer,{id:"answer1",name:"answer",label:"Function(){}",value:"answer1"});
+    radioButtonCreator(questionsContainer,{id:"answer2",name:"answer",label:"Get ..d",value:"answer2"});
+    radioButtonCreator(questionsContainer,{id:"answer3",name:"answer",label:"Def.",value:"answer3"});
 };
-
-
 
 backendAPI.getQuizNames((error,quizNames)=>{
  quizNames.forEach(quizName => {
