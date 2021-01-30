@@ -29,7 +29,6 @@ function htmlElementCreator(tagName,attributes,textContent){
      element.setAttribute(key,attributes[key])
     });  
   }
-
   if (textContent){
     element.textContent = textContent;
   }
@@ -51,11 +50,9 @@ function radioButtonForWelcomePage(label,value) {
 };
 
 function createQuestionRB(){
-    const questionNumber = document.createElement("h2"); 
-    questionNumber.textContent = "Question number: 1"; 
+    const questionNumber = htmlElementCreator("h2",{},"Question number: 1"); 
     questionsContainer.append(questionNumber);
-    const displayQuestion = document.createElement("h3"); 
-    displayQuestion.textContent = "How do you define function in JavaScript?"; 
+    const displayQuestion = htmlElementCreator("h3",{},"How do you define function in JavaScript?"); 
     questionsContainer.append(displayQuestion);
     
     radioButtonCreator(questionsContainer,{id:"answer1",name:"answer",label:"Function(){}",value:"answer1"});
