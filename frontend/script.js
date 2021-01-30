@@ -49,15 +49,15 @@ function radioButtonForWelcomePage(label,value) {
   radioButtonCreator(quizRadioButtons,{id:newInputId,label:label,value:value,name:"quiztype"});
 };
 
-function createQuestionRB(){
-    const questionNumber = htmlElementCreator("h2",{},"Question number: 1"); 
-    questionsContainer.append(questionNumber);
-    const displayQuestion = htmlElementCreator("h3",{},"How do you define function in JavaScript?"); 
+function createQuestionRB(questionNumber,questionText,answersArray){
+    const questionNumberHTML = htmlElementCreator("h2",{},`Question number: ${questionNumber}`); 
+    questionsContainer.append(questionNumberHTML);
+    const displayQuestion = htmlElementCreator("h3",{},questionText); 
     questionsContainer.append(displayQuestion);
     
-    radioButtonCreator(questionsContainer,{id:"answer1",name:"answer",label:"Function(){}",value:"answer1"});
-    radioButtonCreator(questionsContainer,{id:"answer2",name:"answer",label:"Get ..d",value:"answer2"});
-    radioButtonCreator(questionsContainer,{id:"answer3",name:"answer",label:"Def.",value:"answer3"});
+    answersArray.forEach((answerText,index)=> {
+      radioButtonCreator(questionsContainer,{id:`answer${questionNumber}-${index}`,name:`answer${questionNumber}`,label:answerText,value:answerText});
+    });
 };
 
 backendAPI.getQuizNames((error,quizNames)=>{
@@ -66,4 +66,5 @@ backendAPI.getQuizNames((error,quizNames)=>{
  });
 });
 
-createQuestionRB();
+createQuestionRB("1","How do you define function in JavaScript?",["Function(){}","Get ..d","Def."]);
+createQuestionRB("2","How do you define function in JavaScript?",["Function(){}","Get ..d","Def."]);
