@@ -26,5 +26,12 @@ const backendAPI = {
     return question.id;
    });
    cb(null,ids);
-  }
+  },
+  
+  getQuestion: function(id,cb){
+    const ids = questions.find((question)=>{
+      return question.id==id;
+    });
+    cb(null,ids);
+   }
 };
