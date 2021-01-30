@@ -1,14 +1,3 @@
-htmlElement.startButton.addEventListener("click", ()=>{
-  htmlElement.welcomePage.classList.add("hidden");
-  htmlElement.questionsPage.classList.remove("hidden");
-  const quizName = document.querySelector('input[name="quiztype"]:checked').value;
-  startQuiz(htmlElement.usernameInput.value, quizName);
-}); 
-
-function startQuiz(username,quizName){
-  console.log("Quiz is starting now:",username, quizName);
-};
- 
 function radioButtonForWelcomePage(label,value) {
   const newInputId = `${value}radio`;
   htmlCreator.radio(htmlElement.quizRadioButtons,{id:newInputId,label:label,value:value,name:"quiztype"});
@@ -25,11 +14,22 @@ function createQuestionRB(questionNumber,questionText,answersArray){
     });
 };
 
+function startQuiz(username,quizName){
+  backendAPI.getQuizQuestionsList(quizName,(error,ids)=>{
+    console.log("questions:",ids.join(','))
+  });
+};
+
+htmlElement.startButton.addEventListener("click", ()=>{
+  htmlElement.welcomePage.classList.add("hidden");
+  htmlElement.questionsPage.classList.remove("hidden");
+  const quizName = document.querySelector('input[name="quiztype"]:checked').value;
+  startQuiz(htmlElement.usernameInput.value, quizName);
+}); 
+
 backendAPI.getQuizNames((error,quizNames)=>{
  quizNames.forEach(quizName => {
   radioButtonForWelcomePage(quizName, quizName.toLowerCase());
  });
 });
 
-createQuestionRB("1","How do you define function in JavaScript?",["Function(){}","Get ..d","Def."]);
-createQuestionRB("2","How do you define function in JavaScript?",["Function(){}","Get ..d","Def."]);

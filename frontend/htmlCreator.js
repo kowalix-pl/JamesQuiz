@@ -1,3 +1,4 @@
+//creates html elements (tags, radio buttons)
 const htmlCreator = {}
 htmlCreator.element = (tagName,attributes,textContent)=>{
   const element = document.createElement(tagName);
