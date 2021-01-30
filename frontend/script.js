@@ -4,18 +4,12 @@ const backendAPI = {
   }
 };
 
-const startButton = document.getElementById("startButton");
-const welcomePage = document.getElementById("welcomePage");
-const questionsPage = document.getElementById("questionsPage");
-const quizRadioButtons = document.getElementById("quizInput");
-const usernameInput = document.getElementById("usernameInput");
-const questionsContainer = document.getElementById("questionsContainer");
 
-startButton.addEventListener("click", ()=>{
-  welcomePage.classList.add("hidden");
-  questionsPage.classList.remove("hidden");
+htmlElement.startButton.addEventListener("click", ()=>{
+  htmlElement.welcomePage.classList.add("hidden");
+  htmlElement.questionsPage.classList.remove("hidden");
   const quizName = document.querySelector('input[name="quiztype"]:checked').value;
-  startQuiz(usernameInput.value, quizName);
+  startQuiz(htmlElement.usernameInput.value, quizName);
 }); 
 
 function startQuiz(username,quizName){
@@ -46,17 +40,17 @@ function radioButtonCreator(parent,options) {
  
 function radioButtonForWelcomePage(label,value) {
   const newInputId = `${value}radio`;
-  radioButtonCreator(quizRadioButtons,{id:newInputId,label:label,value:value,name:"quiztype"});
+  radioButtonCreator(htmlElement.quizRadioButtons,{id:newInputId,label:label,value:value,name:"quiztype"});
 };
-
+// generate radiobuttons
 function createQuestionRB(questionNumber,questionText,answersArray){
     const questionNumberHTML = htmlElementCreator("h2",{},`Question number: ${questionNumber}`); 
-    questionsContainer.append(questionNumberHTML);
+    htmlElement.questionsContainer.append(questionNumberHTML);
     const displayQuestion = htmlElementCreator("h3",{},questionText); 
-    questionsContainer.append(displayQuestion);
+    htmlElement.questionsContainer.append(displayQuestion);
     
     answersArray.forEach((answerText,index)=> {
-      radioButtonCreator(questionsContainer,{id:`answer${questionNumber}-${index}`,name:`answer${questionNumber}`,label:answerText,value:answerText});
+      radioButtonCreator(htmlElement.questionsContainer,{id:`answer${questionNumber}-${index}`,name:`answer${questionNumber}`,label:answerText,value:answerText});
     });
 };
 
