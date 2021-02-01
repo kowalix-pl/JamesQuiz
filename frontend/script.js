@@ -16,7 +16,9 @@ function createQuestionRB(questionNumber,questionText,answersArray){
 
 function startQuiz(username,quizName){
   backendAPI.getQuizQuestionsList(quizName,(error,ids)=>{
-    console.log("questions:",ids.join(','))
+    backendAPI.getQuestion(ids[0],(error,questionData)=>{
+       createQuestionRB(1,questionData.text,questionData.answers);
+    })
   });
 };
 

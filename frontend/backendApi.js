@@ -3,6 +3,7 @@ const questions = [];
 questions.push({
   text:"How do you define function in JavaScript?",
   answers:["Function(){}","Get ..d","Def."],
+  correctAnswer:"Function(){}",
   id:1
 });
 questions.push({
@@ -29,9 +30,9 @@ const backendAPI = {
   },
   
   getQuestion: function(id,cb){
-    const ids = questions.find((question)=>{
+    const foundQuestion = questions.find((question)=>{
       return question.id==id;
     });
-    cb(null,ids);
+    cb(null,foundQuestion);
    }
 };
