@@ -6,3 +6,4 @@ htmlElement.questionsPage = document.getElementById("questionsPage");
 htmlElement.quizRadioButtons = document.getElementById("quizInput");
 htmlElement.usernameInput = document.getElementById("usernameInput");
 htmlElement.questionsContainer = document.getElementById("questionsContainer");
+htmlElement.nextQuestionButton = document.getElementById("nextQuestionButton");
