@@ -23,17 +23,18 @@ const backendAPI = {
     return Promise.resolve(["HTML","CSS","JavaScript"]);
   },
 
-  getQuizQuestionsList: function(quizName,cb){
-   const ids = questions.map((question)=>{
-    return question.id;
-   });
-   cb(null,ids);
-  },
+  getQuizQuestionsList: function(quizName){
+    const ids = questions.map((question)=>{
+     return question.id;
+    });
+    return Promise.resolve(ids);
+   },
   
-  getQuestion: function(id,cb){
+  getQuestion: function(id){
     const foundQuestion = questions.find((question)=>{
       return question.id==id;
     });
-    cb(null,foundQuestion);
+    return Promise.resolve(foundQuestion);
    }
 };
+

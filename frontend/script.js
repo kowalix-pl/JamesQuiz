@@ -14,12 +14,10 @@ function createQuestionRB(questionNumber,questionText,answersArray){
     });
 };
 
-function startQuiz(username,quizName){
-  backendAPI.getQuizQuestionsList(quizName,(error,ids)=>{
-    backendAPI.getQuestion(ids[0],(error,questionData)=>{
-       createQuestionRB(1,questionData.text,questionData.answers);
-    })
-  });
+async function startQuiz(username,quizName){
+  const ids = await backendAPI.getQuizQuestionsList(quizName);
+  const questionData = await backendAPI.getQuestion(ids[0]);
+  createQuestionRB(1,questionData.text,questionData.answers);
 };
 
 htmlElement.startButton.addEventListener("click", ()=>{
