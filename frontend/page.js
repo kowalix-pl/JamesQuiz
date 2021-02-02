@@ -10,6 +10,7 @@ class Page{
     this._element.classList.remove("hidden");
   }
 }
+
 class WelcomePage extends Page{
   constructor(containerID){
     super(containerID);//super calls constructor of the super class.
@@ -36,6 +37,7 @@ class WelcomePage extends Page{
     this._clickHandler = fn;
   }
 }
+
 class QuestionsPage extends Page{
   constructor(containerID){
     super(containerID);
