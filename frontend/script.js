@@ -10,13 +10,35 @@ class Page{
     this._element.classList.remove("hidden");
   }
 }
-const welcomePage = new Page("welcomePage");
+class WelcomePage extends Page{
+  constructor(containerID){
+    super(containerID);//super calls constructor of the super class.
+    this._clickHandler = function(){};
+    const startButton = document.getElementById("startButton");
+    startButton.addEventListener("click", ()=>{
+      const quizName = document.querySelector('input[name="quiztype"]:checked').value;
+      const usernameInput = document.getElementById("usernameInput");
+      this._clickHandler(usernameInput.value, quizName);
+    }); 
+  }
+  displayQuizForm(quizNames){
+    quizNames.forEach(quizName => {
+     this._radioButton(quizName, quizName.toLowerCase());
+    });
+  }
+  _radioButton(label, value){
+    const newInputId = `${value}radio`;
+    const radioContainer = document.getElementById("quizInput");
+    htmlCreator.radio(radioContainer,{id:newInputId,label:label,value:value,name:"quiztype"});
+  }
+  // Registeres callback for when the start button is clicked
+  startButtonClicked(fn){
+    this._clickHandler = fn;
+  }
+}
+const welcomePage = new WelcomePage("welcomePage");
 const questionsPage = new Page("questionsPage");
 
-function radioButtonForWelcomePage(label,value) {
-  const newInputId = `${value}radio`;
-  htmlCreator.radio(htmlElement.quizRadioButtons,{id:newInputId,label:label,value:value,name:"quiztype"});
-};
 // generate radiobuttons
 function createQuestionRB(questionNumber,questionText,answersArray){
     const questionNumberHTML = htmlCreator.element("h2",{},`Question number: ${questionNumber}`); 
@@ -34,13 +56,12 @@ async function startQuiz(username,quizName){
   const questionData = await backendAPI.getQuestion(ids[0]);
   createQuestionRB(1,questionData.text,questionData.answers);
 };
-
-htmlElement.startButton.addEventListener("click", ()=>{
+//Handles the click on the start button
+welcomePage.startButtonClicked((userName,quizName)=>{
   welcomePage.hide();
   questionsPage.show();
-  const quizName = document.querySelector('input[name="quiztype"]:checked').value;
-  startQuiz(htmlElement.usernameInput.value, quizName);
-}); 
+  startQuiz(userName, quizName);
+})
 
 htmlElement.nextQuestionButton.addEventListener("click", ()=>{
   const name = `answer${1}`; //Radio button number
@@ -50,7 +71,5 @@ htmlElement.nextQuestionButton.addEventListener("click", ()=>{
 
 (async ()=>{
   const quizNames = await backendAPI.getQuizNames();
-  quizNames.forEach(quizName => {
-    radioButtonForWelcomePage(quizName, quizName.toLowerCase());
-  });
+  welcomePage.displayQuizForm(quizNames);
 })();
