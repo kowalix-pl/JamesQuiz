@@ -18,8 +18,9 @@ questions.push({
 });
 
 const backendAPI = {
-  getQuizNames: function(cb) {
-    cb(null,["HTML","CSS","JavaScript"])
+  
+  getQuizNames: function() {
+    return Promise.resolve(["HTML","CSS","JavaScript"]);
   },
 
   getQuizQuestionsList: function(quizName,cb){

@@ -30,15 +30,14 @@ htmlElement.startButton.addEventListener("click", ()=>{
 }); 
 
 htmlElement.nextQuestionButton.addEventListener("click", ()=>{
-  const name = `answer${1}`;//Radio button number
+  const name = `answer${1}`; //Radio button number
   const quizAnswer = document.querySelector(`input[name="${name}"]:checked`).value;
   console.log(`Next Q button clicked!, answer is:${quizAnswer}`);
-  
 }); 
 
-backendAPI.getQuizNames((error,quizNames)=>{
- quizNames.forEach(quizName => {
-  radioButtonForWelcomePage(quizName, quizName.toLowerCase());
- });
-});
-
+(async ()=>{
+  const quizNames = await backendAPI.getQuizNames();
+  quizNames.forEach(quizName => {
+    radioButtonForWelcomePage(quizName, quizName.toLowerCase());
+  });
+})();
