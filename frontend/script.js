@@ -3,6 +3,7 @@ class QuizController {
   constructor(){
     this.welcomePage = new WelcomePage("welcomePage");
     this.questionsPage = new QuestionsPage("questionsPage");
+    this.resultsPage = new ResultsPage("resultsPage");
   }
 
   async welcome(){
@@ -28,14 +29,18 @@ class QuizController {
       if (answer == correctAnswer){
         numberOfCorrectAnswers++;
       }
-      console.log(`Submitted answer for ${currentQuestionIndex}, answer is:${answer}`);
       currentQuestionIndex++;
       if (currentQuestionIndex < ids.length){
         correctAnswer = await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);
-      }else{
-       console.log("quiz is finished",numberOfCorrectAnswers);
+      } else {
+        await this.endQuiz(username,numberOfCorrectAnswers,ids.length); 
       };
     }); 
+  }
+  async endQuiz(userName,correctAnswers,totalQuestions){
+     this.questionsPage.hide();
+     this.resultsPage.show();
+     this.resultsPage.displayResults(userName,correctAnswers,totalQuestions);
   }
   //function to get the data from the backend and display it
   async _question(id,questionNumber){

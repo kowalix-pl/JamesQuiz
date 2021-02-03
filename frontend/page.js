@@ -68,3 +68,11 @@ class QuestionsPage extends Page{
     this._onSubmitAnswer = fn;
   }
 }
+
+class ResultsPage extends Page{
+   displayResults(username,correct,total){
+     const resultsText = `Congratulations ${username} you got ${correct} out of ${total}!`;
+     const resultsHTML = htmlCreator.element("h2",{},resultsText); 
+     this._element.append(resultsHTML);
+   }
+}
