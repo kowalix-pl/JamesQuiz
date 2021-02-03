@@ -9,11 +9,13 @@ questions.push({
 questions.push({
   text:"How do you define function in Ruby?",
   answers:["Var","Const."],
+  correctAnswer: "Const.",
   id:2
 });
 questions.push({
   text:"How do you?",
   answers:["let","var."],
+  correctAnswer:"var.",
   id:3
 });
 

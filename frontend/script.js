@@ -4,7 +4,7 @@ class QuizController {
     this.welcomePage = new WelcomePage("welcomePage");
     this.questionsPage = new QuestionsPage("questionsPage");
   }
-  
+
   async welcome(){
     const quizNames = await backendAPI.getQuizNames();
     this.welcomePage.displayQuizForm(quizNames);
@@ -21,14 +21,19 @@ class QuizController {
   async startQuiz(username,quizName){
     const ids = await backendAPI.getQuizQuestionsList(quizName);
     let currentQuestionIndex = 0;
-    await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);
+    let numberOfCorrectAnswers = 0;
+    let correctAnswer; 
+    correctAnswer = await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);
     this.questionsPage.onSubmitAnswer(async (answer)=>{
+      if (answer == correctAnswer){
+        numberOfCorrectAnswers++;
+      }
       console.log(`Submitted answer for ${currentQuestionIndex}, answer is:${answer}`);
       currentQuestionIndex++;
       if (currentQuestionIndex < ids.length){
-        await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);
+        correctAnswer = await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);
       }else{
-       console.log("quiz is finished");
+       console.log("quiz is finished",numberOfCorrectAnswers);
       };
     }); 
   }
@@ -36,6 +41,7 @@ class QuizController {
   async _question(id,questionNumber){
     const questionData = await backendAPI.getQuestion(id);
     this.questionsPage.displayQuestion(questionNumber,questionData.text,questionData.answers);
+    return questionData.correctAnswer;
   }
 }
 const quizController = new QuizController();
