@@ -1,18 +1,6 @@
 const welcomePage = new WelcomePage("welcomePage");
 const questionsPage = new QuestionsPage("questionsPage");
 
-async function startQuiz(username,quizName){
-  const ids = await backendAPI.getQuizQuestionsList(quizName);
-  const questionData = await backendAPI.getQuestion(ids[0]);
-  questionsPage.displayQuestion(1,questionData.text,questionData.answers);
-  questionsPage.onSubmitAnswer(async (answer)=>{
-    console.log(`Next Q button clicked!, answer is:${answer}`);
-    const questionData = await backendAPI.getQuestion(ids[1]);
-    console.log(questionData);
-  }); 
-};
-
-
 (async ()=>{
   const quizNames = await backendAPI.getQuizNames();
   welcomePage.displayQuizForm(quizNames);
@@ -23,3 +11,24 @@ async function startQuiz(username,quizName){
     startQuiz(userName, quizName);
   })
 })();
+
+async function startQuiz(username,quizName){
+  const ids = await backendAPI.getQuizQuestionsList(quizName);
+  let currentQuestionIndex = 0;
+  await question(ids[currentQuestionIndex],currentQuestionIndex+1);
+  questionsPage.onSubmitAnswer(async (answer)=>{
+    console.log(`Submitted answer for ${currentQuestionIndex}, answer is:${answer}`);
+    currentQuestionIndex++;
+    if (currentQuestionIndex < ids.length){
+      await question(ids[currentQuestionIndex],currentQuestionIndex+1);
+    }else{
+     console.log("quiz is finished");
+    };
+  }); 
+};
+
+//function to get the data from the backend and display it
+async function question(id,questionNumber){
+  const questionData = await backendAPI.getQuestion(id);
+  questionsPage.displayQuestion(questionNumber,questionData.text,questionData.answers);
+};

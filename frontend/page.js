@@ -44,20 +44,24 @@ class QuestionsPage extends Page{
     this._onSubmitAnswer = function(){};
     const nextQuestionButton = document.getElementById("nextQuestionButton");
     nextQuestionButton.addEventListener("click", ()=>{
-      const name = `answer${1}`; //Radio button number
-      const quizAnswer = document.querySelector(`input[name="${name}"]:checked`).value;
-      this._onSubmitAnswer(quizAnswer);
+      const name = `answer`; //Radio button number
+      const quizAnswerElement = document.querySelector(`input[name="${name}"]:checked`)
+      if (quizAnswerElement){//checks if the radio button is checked by the user
+        const quizAnswer = quizAnswerElement.value;
+        this._onSubmitAnswer(quizAnswer);
+      }
     }); 
   }
   displayQuestion(questionNumber,questionText,answersArray){
     const questionsContainer = document.getElementById("questionsContainer");
+    questionsContainer.innerHTML = "";
     const questionNumberHTML = htmlCreator.element("h2",{},`Question number: ${questionNumber}`); 
     questionsContainer.append(questionNumberHTML);
     const displayQuestion = htmlCreator.element("h3",{},questionText); 
     questionsContainer.append(displayQuestion);
     
     answersArray.forEach((answerText,index)=> {
-      htmlCreator.radio(questionsContainer,{id:`answer${questionNumber}-${index}`,name:`answer${questionNumber}`,label:answerText,value:answerText});
+      htmlCreator.radio(questionsContainer,{id:`answer${questionNumber}-${index}`,name:`answer`,label:answerText,value:answerText});
     });
   }
   onSubmitAnswer(fn){
