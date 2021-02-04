@@ -22,7 +22,11 @@ questions.push({
 const backendAPI = {
   
   getQuizNames: function() {
-    return Promise.resolve(["HTML","CSS","JavaScript"]);
+    return fetch('http://127.0.0.1:3000/quizzes')
+      .then(response=>response.json())
+      .then((quizArray)=>{
+        return quizArray.map(quiz=>quiz.name);
+      })
   },
 
   getQuizQuestionsList: function(quizName){
