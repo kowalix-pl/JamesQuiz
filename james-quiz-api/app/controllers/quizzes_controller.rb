@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: [:show, :update, :destroy]
+  before_action :set_quiz, only: [:update, :destroy]
 
   # GET /quizzes
   def index
@@ -10,7 +10,9 @@ class QuizzesController < ApplicationController
 
   # GET /quizzes/1
   def show
-    render json: @quiz
+    @quiz=Quiz.find_by({name: params[:id]})
+    questions = @quiz.questions.map{|question| question.id}
+    render json: questions
   end
 
   # POST /quizzes
