@@ -17,14 +17,17 @@ class WelcomePage extends Page{
     this._clickHandler = function(){};
     const startButton = document.getElementById("startButton");
     startButton.addEventListener("click", ()=>{
-      const quizName = document.querySelector('input[name="quiztype"]:checked').value;
-      const usernameInput = document.getElementById("usernameInput");
-      this._clickHandler(usernameInput.value, quizName);
+      const quizNameElement = document.querySelector('input[name="quiztype"]:checked');
+      if (quizNameElement){
+        const quizName = quizNameElement.value;
+        const usernameInput = document.getElementById("usernameInput");
+        this._clickHandler(usernameInput.value, quizName);
+      }
     }); 
   }
   displayQuizForm(quizNames){
     quizNames.forEach(quizName => {
-     this._radioButton(quizName, quizName.toLowerCase());
+     this._radioButton(quizName, quizName);
     });
   }
   _radioButton(label, value){
@@ -74,5 +77,30 @@ class ResultsPage extends Page{
      const resultsText = `Congratulations ${username} you got ${correct} out of ${total}!`;
      const resultsHTML = htmlCreator.element("h2",{},resultsText); 
      this._element.append(resultsHTML);
+   }
+   displayScores(scores){
+     const tableHTML = htmlCreator.element("table");
+     const theadHTML = htmlCreator.element("thead");
+     const headtrHTML = htmlCreator.element("tr");
+     const thuserHTML = htmlCreator.element("th",{},"Username");
+     const thpointsHTML = htmlCreator.element("th",{},"Points");
+     tableHTML.append(theadHTML);
+     theadHTML.append(headtrHTML);
+     headtrHTML.append(thuserHTML);
+     headtrHTML.append(thpointsHTML); 
+     scores.forEach((score)=>{
+       const newRow = this.scoreRow(score);
+       tableHTML.append(newRow);
+     })
+     this._element.append(tableHTML);
+   }
+//creates 1 row
+   scoreRow(score){
+    const trHTML = htmlCreator.element("tr");
+    const tdHTML = htmlCreator.element("td",{},score.username);
+    const tdpointsHTML = htmlCreator.element("td",{},score.points);
+    trHTML.append(tdHTML);
+    trHTML.append(tdpointsHTML);
+    return trHTML;
    }
 }
