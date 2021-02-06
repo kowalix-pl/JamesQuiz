@@ -19,3 +19,8 @@
 .resultsTable{
   margin: auto;
 }
+
+#resultsPage h2{
+  margin: auto;
+  text-align: center;
+}
