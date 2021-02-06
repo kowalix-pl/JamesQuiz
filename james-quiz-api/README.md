@@ -1,24 +1,39 @@
-# README
+# Welcome to JamesQuiz - your personal JavaScript/CSS/HTML Quiz.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This useful tool will help you test your knowledge of JavaScript, CSS and HTML.
 
-Things you may want to cover:
+## Project Description
+   JamesQuiz - was created in order to help future software developers hone their programming skills by testing their knowledge of some of the most popular languages used in web-development.
 
-* Ruby version
+## Installation Guide 
+   Please follow the below-listed steps to install our program:
 
-* System dependencies
+   Clone the repository using the command:
+   `git clone git@github.com:kowalix-pl/JamesQuiz.git`
 
-* Configuration
+   Install all necessary gems using the command:
+   `bundle install`
 
-* Database creation
+    and ensure that Yarn is up to date by running: 
+    `yarn install --check-files`
+   
+   Migrate the database using the command:
+   `rails db:migrate RAILS_ENV=development`
 
-* Database initialization
+   Seed the database using the command:
+   `rake db:seed`
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## Running  Guide:
 
-* Deployment instructions
+   Use `rails s` to start the API server and open `frontend/index.html` to run the quiz.
 
-* ...
+## Contributing
+   Bug reports and pull requests are welcome on GitHub at https://github.com/kowalix-pl/JamesQuiz. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org/) code of conduct.
+
+## License
+   The gem is available as open source under the terms of the [MIT](https://opensource.org/licenses/MIT) License.
+
+## Code of Conduct
+   Everyone interacting in the DiscogsSinatra project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct.
+ 
