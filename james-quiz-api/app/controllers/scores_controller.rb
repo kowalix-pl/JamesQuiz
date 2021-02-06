@@ -4,7 +4,6 @@ class ScoresController < ApplicationController
   # GET /scores
   def index
     @scores = Score.all
-
     render json: @scores
   end
 
@@ -15,10 +14,13 @@ class ScoresController < ApplicationController
 
   # POST /scores
   def create
-    @score = Score.new(score_params)
-
-    if @score.save
-      render json: @score, status: :created, location: @score
+    # {"score"=>{"points"=>2, "userName"=>"", "quizName"=>"HTML"}}
+    quiz = Quiz.find_by({name: params["score"]["quizName"]})
+    @score = quiz.scores.create({points: params["score"]["points"],username: params["score"]["userName"]})
+    scores = quiz.scores.order("points desc").limit(3)
+    
+    if @score.errors.empty?
+      render json: scores, status: :created, location: @score
     else
       render json: @score.errors, status: :unprocessable_entity
     end
