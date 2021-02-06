@@ -79,7 +79,7 @@ class ResultsPage extends Page{
      this._element.append(resultsHTML);
    }
    displayScores(scores){
-     const tableHTML = htmlCreator.element("table");
+     const tableHTML = htmlCreator.element("table",{class: "resultsTable"});
      const theadHTML = htmlCreator.element("thead");
      const headtrHTML = htmlCreator.element("tr");
      const thuserHTML = htmlCreator.element("th",{},"Username");

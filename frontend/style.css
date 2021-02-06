@@ -4,3 +4,18 @@
 #questionsContainer{
   margin: 10px;
 }
+.resultsTable td, .resultsTable th{
+  border: 3px solid black; 
+}
+
+.resultsTable th{
+  background-color: greenyellow;
+}
+
+#resultsPage{
+  width: 100%;
+}
+
+.resultsTable{
+  margin: auto;
+}

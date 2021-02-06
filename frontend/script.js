@@ -4,6 +4,7 @@ class QuizController {
     this.welcomePage = new WelcomePage("welcomePage");
     this.questionsPage = new QuestionsPage("questionsPage");
     this.resultsPage = new ResultsPage("resultsPage");
+
   }
 
   async welcome(){
