@@ -17,7 +17,7 @@ class ScoresController < ApplicationController
     # {"score"=>{"points"=>2, "userName"=>"", "quizName"=>"HTML"}}
     quiz = Quiz.find_by({name: params["score"]["quizName"]})
     @score = quiz.scores.create({points: params["score"]["points"],username: params["score"]["userName"]})
-    scores = quiz.scores.order("points desc").limit(3)
+    scores = quiz.scores.order("points desc").limit(10)
     
     if @score.errors.empty?
       render json: scores, status: :created, location: @score

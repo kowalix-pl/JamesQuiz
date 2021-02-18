@@ -21,6 +21,8 @@ class QuizController {
       }
     })
   }
+
+  //displays the welcome page 
   async run(){
     await this.welcome();
   }
@@ -29,14 +31,15 @@ class QuizController {
     let currentQuestionIndex = 0;
     let numberOfCorrectAnswers = 0;
     let correctAnswer; 
-    correctAnswer = await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);
+    correctAnswer = await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);//display the first question
     this.questionsPage.onSubmitAnswer(async (answer)=>{
+      //handles comparison of the user response vs. the correct answer
       if (answer == correctAnswer){
         numberOfCorrectAnswers++;
       }
       currentQuestionIndex++;
       if (currentQuestionIndex < ids.length){
-        correctAnswer = await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);
+        correctAnswer = await this._question(ids[currentQuestionIndex],currentQuestionIndex+1);//display the question and returns the correct answer
       } else {
         await this.endQuiz(username,quizName,numberOfCorrectAnswers,ids.length); 
       };
@@ -44,6 +47,7 @@ class QuizController {
   }
   async endQuiz(userName,quizName,correctAnswers,totalQuestions){
      const scores = await backendAPI.scoreQuiz(userName,quizName,correctAnswers);
+     //contains top results for the quiz 
      this.questionsPage.hide();
      this.resultsPage.show();
      this.resultsPage.displayResults(userName,correctAnswers,totalQuestions);
@@ -51,9 +55,9 @@ class QuizController {
     }
   //function to get the data from the backend and display it
   async _question(id,questionNumber){
-    const questionData = await backendAPI.getQuestion(id);
+    const questionData = await backendAPI.getQuestion(id);//get all question data
     this.questionsPage.displayQuestion(questionNumber,questionData.text,questionData.choices);
-    return questionData.answer;
+    return questionData.answer;//
   }
 }
 const quizController = new QuizController();

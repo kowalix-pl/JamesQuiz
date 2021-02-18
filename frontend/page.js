@@ -10,7 +10,7 @@ class Page{
     this._element.classList.remove("hidden");
   }
 }
-
+//all classes represent specific pages (welcome,questions&results)
 class WelcomePage extends Page{
   constructor(containerID){
     super(containerID);//super calls constructor of the super class.
@@ -55,6 +55,7 @@ class QuestionsPage extends Page{
       }
     }); 
   }
+  //displays a single question 
   displayQuestion(questionNumber,questionText,answersArray){
     const questionsContainer = document.getElementById("questionsContainer");
     questionsContainer.innerHTML = "";
@@ -65,8 +66,10 @@ class QuestionsPage extends Page{
     
     answersArray.forEach((answerText,index)=> {
       htmlCreator.radio(questionsContainer,{id:`answer${questionNumber}-${index}`,name:`answer`,label:answerText,value:answerText});
+   //name for the radiobuttons allows grouping
     });
   }
+  //registers the submit answer handler
   onSubmitAnswer(fn){
     this._onSubmitAnswer = fn;
   }
@@ -94,7 +97,7 @@ class ResultsPage extends Page{
      })
      this._element.append(tableHTML);
    }
-//creates 1 row
+//creates 1 row of the high score table 
    scoreRow(score){
     const trHTML = htmlCreator.element("tr");
     const tdHTML = htmlCreator.element("td",{},score.username);

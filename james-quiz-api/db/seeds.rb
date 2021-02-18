@@ -23,7 +23,7 @@
     java_script_quiz.questions.create({
       text: "How do you call a function named myFunction?",
       answer: "myFunction()",
-      choices: ["myFunction()","call myFunction()"," call function myFunction()"]
+      choices: ["myFunction()","call myFunction()","call function myFunction()"]
     })
 
     java_script_quiz.questions.create({
