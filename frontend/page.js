@@ -24,12 +24,29 @@ class WelcomePage extends Page{
         this._clickHandler(usernameInput.value, quizName);
       }
     }); 
+    const quizNameFilter = document.getElementById('newnameInput');
+    quizNameFilter.addEventListener("keyup",()=>{
+      const inputText = quizNameFilter.value.toLowerCase();
+      const quizNames = this.allQuizNames.filter((quizName)=>{
+        return quizName.toLowerCase().startsWith(inputText);
+      });
+      this._displayQuizRadioButtons(quizNames);
+    })
   }
+
   displayQuizForm(quizNames){
+    this.allQuizNames = quizNames; 
+    this._displayQuizRadioButtons(quizNames);
+  }
+
+  _displayQuizRadioButtons(quizNames){
+    const radioContainer = document.getElementById("quizInput");
+    radioContainer.innerHTML = "";
     quizNames.forEach(quizName => {
      this._radioButton(quizName, quizName);
     });
   }
+  
   _radioButton(label, value){
     const newInputId = `${value}radio`;
     const radioContainer = document.getElementById("quizInput");
