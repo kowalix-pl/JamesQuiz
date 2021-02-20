@@ -24,23 +24,37 @@ class WelcomePage extends Page{
         this._clickHandler(usernameInput.value, quizName);
       }
     }); 
+    // Assigned input text element to the variable:
     const quizNameFilter = document.getElementById('newnameInput');
+   
+    /*Listens to the keyup event, which is fired everytime 
+      when the user releases the key on the keyboard*/
     quizNameFilter.addEventListener("keyup",()=>{
+      
+      /*lowercased the input obtained from the user in order 
+        to allow for case insensitive matching: */
       const inputText = quizNameFilter.value.toLowerCase();
+      
+      /*From all of the quiz names fetched from the backend
+       we select only those ones that have lowercased prefix 
+       equal to the lowercased user input:*/
       const quizNames = this.allQuizNames.filter((quizName)=>{
         return quizName.toLowerCase().startsWith(inputText);
       });
+      //Display matching radio buttons
       this._displayQuizRadioButtons(quizNames);
     })
   }
 
   displayQuizForm(quizNames){
+    //Save all the quiz names from backend for future use:
     this.allQuizNames = quizNames; 
     this._displayQuizRadioButtons(quizNames);
   }
 
   _displayQuizRadioButtons(quizNames){
     const radioContainer = document.getElementById("quizInput");
+    //Remove existing radio buttons from the page
     radioContainer.innerHTML = "";
     quizNames.forEach(quizName => {
      this._radioButton(quizName, quizName);
